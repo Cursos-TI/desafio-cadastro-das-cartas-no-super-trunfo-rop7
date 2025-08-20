@@ -62,42 +62,45 @@ static inline void jsonSaveToFile(ArrayJSON array, const char *filename) {
 }
 
 // Cria um objeto JSON de forma agnóstica
-// Uso: jsonCreateObject(6, "nome", "Alice", "idade", 30, "cidade", "SP")
+// Novo uso: jsonCreateObject(3, "nome", "string", "Alice", "idade", "int", 30, "ativo", "bool", 1)
 static inline ObjectJSON jsonCreateObject(int nPairs, ...) {
+
     ObjectJSON obj = cJSON_CreateObject();
+    
     va_list args;
+    
     va_start(args, nPairs);
 
     for (int i = 0; i < nPairs; i++) {
+    
         const char *key = va_arg(args, const char*);
-        int type = va_arg(args, int); // 0 = int, 1 = double, 2 = string, 3 = bool
-        switch(type) {
-            case 0: {
-                int value = va_arg(args, int);
-                cJSON_AddNumberToObject(obj, key, value);
-                break;
-            }
-            case 1: {
-                double value = va_arg(args, double);
-                cJSON_AddNumberToObject(obj, key, value);
-                break;
-            }
-            case 2: {
-                const char *value = va_arg(args, const char*);
-                cJSON_AddStringToObject(obj, key, value);
-                break;
-            }
-            case 3: {
-                int value = va_arg(args, int); // bool como int
-                cJSON_AddBoolToObject(obj, key, value);
-                break;
-            }
-            default:
-                break;
+        const char *typeName = va_arg(args, const char*); // "int", "double", "string", "bool"
+
+        if (!key || !typeName) {
+            break;
+        }
+
+        if (strcmp(typeName, "int") == 0) {
+            int value = va_arg(args, int);
+            cJSON_AddNumberToObject(obj, key, value);
+        } else if (strcmp(typeName, "double") == 0 || strcmp(typeName, "number") == 0) {
+            double value = va_arg(args, double);
+            cJSON_AddNumberToObject(obj, key, value);
+        } else if (strcmp(typeName, "string") == 0) {
+            const char *value = va_arg(args, const char*);
+            cJSON_AddStringToObject(obj, key, value ? value : "");
+        } else if (strcmp(typeName, "bool") == 0 || strcmp(typeName, "boolean") == 0) {
+            int value = va_arg(args, int);
+            cJSON_AddBoolToObject(obj, key, value ? 1 : 0);
+        } else {
+            // fallback: tratar como string
+            const char *value = va_arg(args, const char*);
+            cJSON_AddStringToObject(obj, key, value ? value : "");
         }
     }
 
     va_end(args);
+    
     return obj;
 }
 
