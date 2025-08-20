@@ -1,0 +1,29 @@
+[{
+		"pib":	2039160736,
+		"nome":	"Recife",
+		"area":	999,
+		"codigo":	1,
+		"populacao":	192929,
+		"pontosTuristicos":	2029332718
+	}, {
+		"pib":	123123123,
+		"nome":	"Natal",
+		"area":	13123,
+		"codigo":	2,
+		"populacao":	202231,
+		"pontosTuristicos":	123123
+	}, {
+		"pib":	123123,
+		"nome":	"Fortaleza",
+		"area":	1231231,
+		"codigo":	3,
+		"populacao":	12313,
+		"pontosTuristicos":	1231231231
+	}, {
+		"pib":	0,
+		"nome":	"Sao",
+		"area":	-1,
+		"codigo":	6,
+		"populacao":	-1,
+		"pontosTuristicos":	262144
+	}]
