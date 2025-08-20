@@ -1,22 +1,49 @@
 #include <stdio.h>
-
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
+#include <cjson/cJSON.h>
+#include "jsonManage.h"
+#include "Carta.h"
 
 int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
-    
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
-    
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
+
+    Carta carta;
+
+    printf("Digite o codigo da cidade: ");
+    scanf("%d", &carta.codigo);
+    printf("Digite o nome da cidade: ");
+    scanf("%99s", carta.nome);
+    printf("Digite a populacao da cidade: ");
+    scanf("%d", &carta.populacao);
+    printf("Digite a area da cidade: ");
+    scanf("%d", &carta.area);
+    printf("Digite o pib da cidade: ");
+    scanf("%d", &carta.pib);
+    printf("Digite o numero de pontos turisticos da cidade: ");
+    scanf("%d", &carta.pontosTuristicos);
+
+    printf("Cadastrando carta...\n ------------- \n");
+
+    printf("Codigo: %d\n", carta.codigo);
+    printf("Nome: %s\n", carta.nome);
+    printf("Populacao: %d\n", carta.populacao);
+    printf("Area: %d\n", carta.area);
+    printf("Pib: %d\n", carta.pib);
+    printf("Pontos Turisticos: %d\n", carta.pontosTuristicos);
+
+    printf("Salvando carta...\n ------------- \n");
+
+    ArrayJSON listaDeCartas = jsonFromFile("cartas.json");
+    ObjectJSON cartaJsonObject = jsonCreateObject(
+        6,
+        "pib", "int", carta.pib,
+        "area", "int", carta.area,
+        "nome", "string", carta.nome,
+        "codigo", "int", carta.codigo,
+        "populacao", "int", carta.populacao,
+        "pontosTuristicos", "int", carta.pontosTuristicos);
+
+    jsonAddObject(listaDeCartas, cartaJsonObject);
+    jsonSaveToFile(listaDeCartas, "cartas.json");
+    jsonFree(listaDeCartas);
 
     return 0;
 }

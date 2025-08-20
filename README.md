@@ -1,3 +1,24 @@
+### by @rop7
+
+# Como foi feito o código?
+
+- O código foi feito em C, utilizando a biblioteca cJSON para gerenciar o JSON e armazenar as cartas.
+- O código foi feito de forma modular, separando as funções em arquivos diferentes.
+- O código foi feito de forma a ser fácil de entender e de manter.
+- O código foi feito de forma a ser fácil de usar.
+
+# Dependências
+
+- Instale o cJSON com o comando `sudo apt-get install libcjson-dev`
+- Instale o gcc com o comando `sudo apt-get install gcc`
+- Instale o npm com o comando `sudo apt-get install npm`
+
+# Como rodar o código?
+
+- Rode o comando `npm run start` = "gcc CartasSuperTrunfo.c -o program -lcjson && ./program"
+
+###############################################################################################################################################################
+
 # Desafio Super Trunfo - Países - Cadastro das Cartas
 
 Bem-vindo ao desafio "Super Trunfo - Países"! No jogo Super Trunfo, os jogadores comparam os atributos das cartas para determinar a mais forte. O tema deste Super Trunfo é "Países", onde você comparará os atributos das cidades.
